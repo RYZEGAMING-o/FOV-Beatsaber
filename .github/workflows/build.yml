@@ -1,0 +1,39 @@
+name: Build qmod
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nttld/setup-ndk@v1
+        id: ndk
+        with:
+          ndk-version: r27c
+
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Setup qpm and restore dependencies
+        uses: QuestPackageManager/qpm-action@v1
+        with:
+          workflow_token: ${{ secrets.GITHUB_TOKEN }}
+          restore: true
+          cache: true
+          publish: false
+
+      - name: Build
+        env:
+          ANDROID_NDK_HOME: ${{ steps.ndk.outputs.ndk-path }}
+        run: |
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -B build
+          cmake --build ./build
+          qpm qmod build
+          qpm qmod zip FovMod.qmod
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FovMod.qmod
+          path: FovMod.qmod
