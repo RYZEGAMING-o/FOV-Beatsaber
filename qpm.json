@@ -19,7 +19,7 @@
     { "id": "beatsaber-hook", "versionRange": "^6.4.2", "additionalData": {} },
     { "id": "bs-cordl",       "versionRange": "4008.*", "additionalData": {} },
     { "id": "custom-types",   "versionRange": "^0.18.3", "additionalData": {} },
-    { "id": "questui",        "versionRange": "*", "additionalData": {} },
+    { "id": "bsml",           "versionRange": "^0.4.55", "additionalData": {} },
     { "id": "config-utils",   "versionRange": "*", "additionalData": {} },
     { "id": "scotland2",      "versionRange": "^0.1.6", "additionalData": { "includeQmod": false } }
   ]
