@@ -18,7 +18,9 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ninja-build
 
       - name: Install qpm
-        run: cargo install --git https://github.com/QuestPackageManager/QPM.CLI
+        run: |
+          rustup toolchain install nightly --profile minimal
+          cargo +nightly install --git https://github.com/QuestPackageManager/QPM.CLI
 
       - name: Restore dependencies
         run: qpm restore
